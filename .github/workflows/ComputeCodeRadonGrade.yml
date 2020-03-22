@@ -34,4 +34,4 @@ jobs:
     - name: Compute Code Radon Grade
       run: |
         pip install xenon
-        xenon -a
+        xenon
