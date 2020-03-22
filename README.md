@@ -1,13 +1,13 @@
 # Spectral Methods in Data Processing (0372-4001) - Final Project 
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb) [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RedCrow9564/SpectralMethodsProject-RandomSVD/blob/master/Spectral_Methods_Project_Random_SVD.ipynb) [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-This is a project submitted as a requirement for this course. [The course](https://www30.tau.ac.il/yedion/syllabus.asp?course=0372400101) was administered in Fall 2019-2020 (before the Coronavirus outbreak...) in [Tel-Aviv University- School of Mathematical Sciences](https://en-exact-sciences.tau.ac.il/math), and taught by [Prof. Yoel Shkolnisky](https://english.tau.ac.il/profile/yoelsh). 
+This is a project submitted as a requirement for this course. [The course](https://www30.tau.ac.il/yedion/syllabus.asp?course=0372400101) was administered in Fall 2019-2020 (before the Coronavirus outbreak...) in [Tel-Aviv University - School of Mathematical Sciences](https://en-exact-sciences.tau.ac.il/math), and taught by [Prof. Yoel Shkolnisky](https://english.tau.ac.il/profile/yoelsh). 
 This project is a reconstruction of experiments of [[1]](#1) for algorithms for Randomized SVD and Randomized Interpolative Decompositions. A complete documentation of the code is avaiable [here][**ADD link_to_doc_homepage**].
 
 ## Getting Started
 
-The code can be fetched from [this repo](https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD.git). The Jupyter Notebook **ADD NOTEBOOK LINK** does the same work, and can be deployed to Google Colab. While the the notebook version can be used immediately, this code has some prerequisites.
+The code can be fetched from [this repo](https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD.git). The [Jupyter Notebook](Spectral_Methods_Project_Random_SVD.ipynb) does the same work, and can be deployed to Google Colab. While the the notebook version can be used immediately, this code has some prerequisites.
 Any questions about this project may be sent by mail to 'eladeatah' at mail.tau.ac.il (replace 'at' by @).
 
 ### Prerequisites
@@ -37,7 +37,7 @@ Credits for the original algorithms , paper and results of [[1]](#1) belong to i
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-* 
+
 ## References
 <a id="1">[1]</a> [P.-G. Martinsson, V. Rokhlin, and M. Tygert. A randomized al-
 gorithm for the decomposition of matrices. Applied and Computa-
