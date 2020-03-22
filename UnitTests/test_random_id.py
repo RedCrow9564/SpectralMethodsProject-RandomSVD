@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-""" Unit-Test for Randomized Interpolative Decomposition.
+"""
+test_random_id.py - tests for Randomized Interpolative Decomposition
+====================================================================
 
 This module contains the tests for the implementation of randomized ID algorithm.
-See the following example for running this module:
-
-Example:
---------
-python -m test_random_id.py
 
 """
 import unittest
-from numpy.random import randn
+from numpy.random import randn as _randn
 import numpy as np
 from scipy.linalg import svdvals
 import pyximport
@@ -20,6 +17,9 @@ from randomized_decompositions import random_id
 
 
 class TestRandomID(unittest.TestCase):
+    """
+    A class which contains tests for the validity of the random_id algorithm implementation.
+    """
     def setUp(self):
         """
         This method sets the variables for the following tests.
@@ -28,13 +28,13 @@ class TestRandomID(unittest.TestCase):
         self._n = 30
         self._k = 5
         self._increment = 20
-        self._A = randn(self._m, self._n)
+        self._A = _randn(self._m, self._n)
         self._B, self._P = random_id(self._A, self._k, self._increment)
         self._approximation = self._B.dot(self._P)
 
     def test_matrices_shapes(self):
         """
-        This methods tests the shapes of the matrices B and P in the decomposition.
+        This methods tests the shapes of the matrices :math:`B` and :math:`P` in the decomposition.
         """
         self.assertTrue(self._B.shape, (self._m, self._k))
         self.assertTrue(self._P.shape, (self._k, self._n))
@@ -58,7 +58,7 @@ class TestRandomID(unittest.TestCase):
     def test_approximation_estimate(self):
         """
         This methods tests if the random ID satisfies the theoretical bound. There is a probability
-        of less then 10^-17 this bound won't be satisfies...
+        of less then :math:`10^{-17}` this bound won't be satisfied...
         """
         real_sigmas = np.linalg.svd(self._A, full_matrices=False, compute_uv=False)
         estimate_error = np.linalg.norm(self._A - self._approximation)

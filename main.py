@@ -1,14 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-""" The main module of the project
+"""
+main.py - The main module of the project
+========================================
 
 This module contains the config for the experiment in the "config" function.
-Running this module invokes the "main" function, which then performs the experiment and saves its results
-to the configured results folder. See the following example for running this module:
-
-Example:
---------
-python -m main.py
+Running this module invokes the :func:`main` function, which then performs the experiment and saves its results
+to the configured results folder. Example for running an experiment: ``python -m main.py``
 
 """
 import numpy as np
@@ -18,18 +16,16 @@ from data_loader import get_data
 from randomized_decompositions import random_svd, random_id
 
 
-def choose_singular_values(experiment_type: str) -> RowVector:
+def choose_singular_values(experiment_type: ExperimentType) -> RowVector:
     """
 
     This function sets the needed singular values, according to the given experiment_type
 
     Args:
-    -----
-    An ExperimentType enum value. For example, ExperimentType.ExampleNo1.
+        experiment_type(ExperimentType): The performed experiment. For example, ``ExperimentType.ExampleNo1``.
 
     Returns:
-    --------
-    A RowVector of the required singular values.
+        A RowVector of the required singular values.
 
     """
     if experiment_type == ExperimentType.ExampleNo1:
@@ -45,40 +41,36 @@ def choose_singular_values(experiment_type: str) -> RowVector:
     return [-1]
 
 
-def choose_increments(experiment_type: str) -> List:
+def choose_increments(experiment_type: ExperimentType) -> List:
     """
 
     This function sets the needed increments, according to the given experiment_type
 
     Args:
-    -----
-    An ExperimentType enum value. For example, ExperimentType.ExampleNo1.
+        experiment_type(ExperimentType): The performed experiment. For example, ``ExperimentType.ExampleNo1``.
 
     Returns:
-    --------
-    A list of the required increments.
+        A list of the required increments.
 
     """
-    if experiment_type in [ExperimentType.ExampleNo1, ExperimentType.ExampleNo3,
+    if experiment_type in [ExperimentType.ExampleNo1, ExperimentType.ExampleNo2,
                            ExperimentType.ExampleNo4, ExperimentType.ExampleNo5]:
         return [0]
-    elif experiment_type == ExperimentType.ExampleNo2:
-        return [0] + np.geomspace(2, 16, 4).tolist()
+    elif experiment_type == ExperimentType.ExampleNo3:
+        return [0] + np.round(np.geomspace(2, 16, 4)).astype(int).tolist()
     return [-1]
 
 
-def choose_approximation_ranks(experiment_type: str) -> List:
+def choose_approximation_ranks(experiment_type: ExperimentType) -> List:
     """
 
     This function sets the needed approximation ranks, according to the given experiment_type
 
     Args:
-    -----
-    An ExperimentType enum value. For example, ExperimentType.ExampleNo1.
+        experiment_type(ExperimentType): The performed experiment. For example, ``ExperimentType.ExampleNo1``.
 
     Returns:
-    --------
-    A list of the required approximation ranks.
+        A list of the required approximation ranks.
 
     """
     if experiment_type in [ExperimentType.ExampleNo1, ExperimentType.ExampleNo2, ExperimentType.ExampleNo5]:
@@ -90,26 +82,24 @@ def choose_approximation_ranks(experiment_type: str) -> List:
     return [-1]
 
 
-def choose_data_sizes(experiment_type: str) -> List:
+def choose_data_sizes(experiment_type: ExperimentType) -> List:
     """
 
     This function sets the needed data sizes, according to the given experiment_type
 
     Args:
-    -----
-    An ExperimentType enum value. For example, ExperimentType.ExampleNo1.
+        experiment_type(ExperimentType): The performed experiment. For example, ``ExperimentType.ExampleNo1``.
 
     Returns:
-    --------
-    A list of the required data sizes.
+        A list of the required data sizes.
 
     """
     if experiment_type in [ExperimentType.ExampleNo1, ExperimentType.ExampleNo2, ExperimentType.ExampleNo5]:
-        return np.geomspace(1e+2, 1e+6).tolist()
+        return np.geomspace(1e+2, 1e+3, 2, dtype=int).tolist()
     elif experiment_type == ExperimentType.ExampleNo3:
         return [1e+5]
     elif experiment_type == ExperimentType.ExampleNo4:
-        return (4 * np.geomspace(1e+2, 1e+6)).tolist()
+        return (4 * np.geomspace(1e+2, 1e+3, 2, dtype=int)).tolist()
     return [-1]
 
 
@@ -118,10 +108,10 @@ def config():
     """ Config section
 
     This function contains all possible configuration for all experiments. Full details on each configuration values
-    can be found in Infrastructure/enums.py.
+    can be found in :mod:`enums.py`.
     """
 
-    experiment_type: str = ExperimentType.ExampleNo1
+    experiment_type: str = ExperimentType.ExampleNo5
     singular_values: RowVector = choose_singular_values(experiment_type)
     used_data_factory: Callable = get_data(experiment_type)
     data_sizes: List = choose_data_sizes(experiment_type)
@@ -147,14 +137,18 @@ def main(data_sizes: List, approximation_ranks: List, increments: List, singular
         data_matrix: Matrix = used_data_factory(data_size, singular_values)
 
         for approximation_rank in approximation_ranks:
-            next_singular_value: Scalar = singular_values[approximation_rank + 1]
+            next_singular_value: Scalar = singular_values[approximation_rank + 1] if \
+                approximation_rank < len(singular_values) else singular_values[-1]
 
             for increment in increments:
                 # Executing all the tested methods.
+                print(f'n={data_size}, k={approximation_rank}, l={approximation_rank + increment}')
                 U, sigma, VT, svd_duration = random_svd_with_run_time(data_matrix, approximation_rank, increment)
                 random_svd_accuracy: Scalar = np.linalg.norm(data_matrix - U.dot(np.diag(sigma).dot(VT)))
+                print(f'runtime={svd_duration}, accuracy={random_svd_accuracy}')
                 B, P, id_duration = random_id_with_run_time(data_matrix, approximation_rank, increment)
                 random_id_accuracy: Scalar = np.linalg.norm(data_matrix - B.dot(P))
+                print(f'runtime={id_duration}, accuracy={random_id_accuracy}')
 
                 # Appending all the experiment results to the log.
                 results_log.append(LogFields.DataSize, data_size)

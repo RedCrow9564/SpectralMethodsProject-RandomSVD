@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-""" Unit-Test for data creation methods.
+"""
+test_data_creation.py - tests for data creation methods
+=======================================================
 
 This module contains the tests for the data creation in all the examples.
-See the following example for running this module:
-
-Example:
---------
-python -m test_data_creation.py
 
 """
 import unittest
@@ -26,7 +23,7 @@ class TestDataCreation(unittest.TestCase):
         """
         Test data creation for Example no. 1
 
-        This test validates the data created is data_size x data_size, has rank 20
+        This test validates the data created is ``data_size x data_size``, has rank 20
         and posses the expected singular values.
 
         """
@@ -37,14 +34,14 @@ class TestDataCreation(unittest.TestCase):
         data: Matrix = get_data(experiment_type)(data_size, singular_values)
         calculated_singular_values: RowVector = svdvals(data, check_finite=False)[:rank]
         self.assertTrue(np.allclose(data.shape, (data_size, data_size)))  # Validate data shape.
-        self.assertEqual(np.linalg.matrix_rank(data, tol=singular_values[rank - 1] / 2), rank)  # Validate data rank.
+        self.assertEqual(np.linalg.matrix_rank(data, tol=1.8e-16), rank)  # Validate data rank.
         self.assertTrue(np.allclose(singular_values, calculated_singular_values))  # Validate singular values.
 
     def test_example_no_2_data(self):
         """
         Test data creation for Example no. 2
 
-        This test validates the data created is data_size x data_size, has rank 20
+        This test validates the data created is ``data_size x data_size``, has rank 20
         and posses the expected singular values.
 
         """
@@ -62,7 +59,7 @@ class TestDataCreation(unittest.TestCase):
         """
         Test data creation for Example no. 3
 
-        This test validates the data created is data_size x data_size, has rank 60
+        This test validates the data created is ``data_size x data_size``, has rank 60
         and posses the expected singular values.
 
         """
@@ -80,7 +77,7 @@ class TestDataCreation(unittest.TestCase):
         """
         Test data creation for Example no. 4
 
-        This test validates the data created is data_size x data_size and posses the expected singular values.
+        This test validates the data created is ``data_size x data_size`` and posses the expected singular values.
 
         """
         experiment_type: str = ExperimentType.ExampleNo4
@@ -96,8 +93,8 @@ class TestDataCreation(unittest.TestCase):
         """
         Test data creation for Example no. 5
 
-        This test validates the data created is data_size x data_size and posses the expected singular value 1e-17 as
-        the second largest singular value with multiplicity of at least data_size - 2.
+        This test validates the data created is ``data_size x data_size`` and posses the expected singular value
+        :math:`10^{-17}` as the second largest singular value with multiplicity of at least ``data_size - 2``.
 
         """
         experiment_type: str = ExperimentType.ExampleNo5

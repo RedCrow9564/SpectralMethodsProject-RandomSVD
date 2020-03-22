@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-""" Unit-Test for Randomized Singular-Value Decomposition.
+"""
+test_random_svd.py - tests for Randomized Singular-Value Decomposition
+======================================================================
 
 This module contains the tests for the implementation of randomized SVD algorithm.
-See the following example for running this module:
-
-Example:
---------
-python -m test_random_svd.py
 
 """
 import unittest
-from numpy.random import randn
+from numpy.random import randn as _randn
 import numpy as np
 import pyximport
 
@@ -19,6 +16,9 @@ from randomized_decompositions import random_svd
 
 
 class TestRandomSVD(unittest.TestCase):
+    """
+    A class which contains tests for the validity of the random_svd algorithm implementation.
+    """
     def setUp(self):
         """
         This method sets the variables for the following tests.
@@ -27,13 +27,13 @@ class TestRandomSVD(unittest.TestCase):
         self._n = 30
         self._k = 5
         self._increment = 20
-        self._A = randn(self._m, self._n)
+        self._A = _randn(self._m, self._n)
         self._U, self._sigma, self._VT = random_svd(self._A, self._k, self._increment)
         self._approximation = self._U.dot(np.diag(self._sigma).dot(self._VT))
 
     def test_matrices_shapes(self):
         """
-        This methods tests the shapes of the matrices B and P in the decomposition.
+        This methods tests the shapes of the matrices :math:`U` and :math:`V` in the decomposition.
         """
         self.assertTrue(self._U.shape, (self._m, self._k))
         self.assertTrue(self._VT.shape, (self._k, self._n))
@@ -55,7 +55,7 @@ class TestRandomSVD(unittest.TestCase):
     def test_approximation_estimate(self):
         """
         This methods tests if the random SVD satisfies the theoretical bound. There is a probability
-        of less then 10^-17 this bound won't be satisfies...
+        of less then :math:`10^{-17}` this bound won't be satisfied...
         """
         real_sigmas = np.linalg.svd(self._A, full_matrices=False, compute_uv=False)
         estimate_error = np.linalg.norm(self._A - self._approximation)

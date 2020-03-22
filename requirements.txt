@@ -1,0 +1,6 @@
+pandas==1.0.1
+scipy==1.4.1
+sacred==0.8.1
+Cython==0.29.14
+numpy==1.17.4
+nptyping==0.3.1

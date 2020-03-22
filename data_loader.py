@@ -5,7 +5,6 @@ This module handles the fetching of the data from the local resources path, give
 for our purposes of estimations. See the example for fetching the data for Example no. 1.
 
 Example:
--------
     get_data(ExperimentType.ExampleNo1) - Creating the data for Example no. 1 of the paper.
 
 """
@@ -24,13 +23,11 @@ def _get_first_3_examples_data(data_size: int, singular_values: RowVector) -> Ma
     """
     A method which creates a random matrix of size data_size x data_size with given singular values.
 
-    Attributes:
-    -----------
+    Args:
         data_size(int): The input data size n.
         singular_values(RowVector): The singular values to be set for the matrix to create.
 
     Returns:
-    --------
         A random size data_size x data_size Matrix awith the given singular values.
 
     """
@@ -44,13 +41,11 @@ def _get_example_4_data(data_size: int, singular_values: RowVector) -> Matrix:
     """
     A method which creates a data_size x data_size matrix whose singular values are the input values.
 
-    Attributes:
-    -----------
+    Args:
         data_size(int): The input data size n.
         singular_values(RowVector): The singular values to be set for the matrix to create.
 
     Returns:
-    --------
         A data_size x data_size Matrix with the given singular values.
 
     """
@@ -69,13 +64,11 @@ def _get_example_5_data(data_size: int, singular_values: RowVector) -> Matrix:
     """
     A method which creates a data_size x data_size matrix with singular values 1 and the other input singular values.
 
-    Attributes:
-    -----------
+    Args:
         data_size(int): The input data size n.
         singular_value(RowVector): A 1x2 vector of singular values for the created matrix.
 
     Returns:
-    --------
         A random size data_size x data_size Matrix with singular values 1 and the other input singular value.
 
     """
