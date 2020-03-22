@@ -7,7 +7,7 @@ This project is a reconstruction of experiments of [[1]](#1) for algorithms for 
 
 ## Getting Started
 
-The code can be fetched from [this repo](https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD.git). The [Jupyter Notebook](Spectral_Methods_Project_Random_SVD.ipynb) does the same work, and can be deployed to Google Colab. While the the notebook version can be used immediately, this code has some prerequisites.
+The code can be fetched from [this repo](https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD.git). The [Jupyter Notebook](Spectral_Methods_Project_Random_SVD.ipynb) does the same work, and can be deployed to Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RedCrow9564/SpectralMethodsProject-RandomSVD/blob/master/Spectral_Methods_Project_Random_SVD.ipynb). While the the notebook version can be used immediately, this code has some prerequisites.
 Any questions about this project may be sent by mail to 'eladeatah' at mail.tau.ac.il (replace 'at' by @).
 
 ### Prerequisites
