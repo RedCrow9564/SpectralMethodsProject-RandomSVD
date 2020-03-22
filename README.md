@@ -23,9 +23,9 @@ All the packages, except for Sacred, are available as well using 'conda' package
 
 The Unit-Test files are:
 
-* [test_data_creation.py](UnitTess/test_data_creation.py) - Tests the data created for all experiments is the data described in the paper [[1]](#1) .
-* [test_random_svd.py](UnitTess/test_random_svd.py) - Tests the implementation of the Random SVD algorithm.
-* [test_random_id.py](UnitTess/test_random_id.py) - Tests the implementation of the Random Interpolative Decompositino algorithm.
+* [test_data_creation.py](UnitTests/test_data_creation.py) - Tests the data created for all experiments is the data described in the paper [[1]](#1) .
+* [test_random_svd.py](UnitTests/test_random_svd.py) - Tests the implementation of the Random SVD algorithm.
+* [test_random_id.py](UnitTests/test_random_id.py) - Tests the implementation of the Random Interpolative Decompositino algorithm.
 
 Running any of these tests can be performed by:
 ```
@@ -36,7 +36,7 @@ Credits for the original algorithms , paper and results of [[1]](#1) belong to i
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## References
 <a id="1">[1]</a> [P.-G. Martinsson, V. Rokhlin, and M. Tygert. A randomized al-
