@@ -1,6 +1,6 @@
 # Spectral Methods in Data Processing (0372-4001) - Final Project 
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RedCrow9564/SpectralMethodsProject-RandomSVD/blob/master/Spectral_Methods_Project_Random_SVD.ipynb) [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RedCrow9564/SpectralMethodsProject-RandomSVD/blob/master/Spectral_Methods_Project_Random_SVD.ipynb) [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)![Python package](https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD/workflows/Python%20package/badge.svg)
 
 This is a project submitted as a requirement for this course. [The course](https://www30.tau.ac.il/yedion/syllabus.asp?course=0372400101) was administered in Fall 2019-2020 (before the Coronavirus outbreak...) in [Tel-Aviv University - School of Mathematical Sciences](https://en-exact-sciences.tau.ac.il/math), and taught by [Prof. Yoel Shkolnisky](https://english.tau.ac.il/profile/yoelsh). 
 This project is a reconstruction of experiments of [[1]](#1) for algorithms for Randomized SVD and Randomized Interpolative Decompositions. A complete documentation of the code is avaiable [here][**ADD link_to_doc_homepage**].
@@ -32,7 +32,7 @@ Running any of these tests can be performed by:
 <python_path> -m unittest <test_file_path>
 ```
 ## Acknowledgments
-Credits for the original algorithms , paper and results of [[1]](#1) belong to its respectful authors: P.-G. Martinsson, V. Rokhlin, and M. Tygert.
+Credits for the original algorithms, paper and results of [[1]](#1) belong to its respectful authors: P.-G. Martinsson, V. Rokhlin, and M. Tygert.
 
 ## License
 
