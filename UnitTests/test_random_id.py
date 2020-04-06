@@ -30,7 +30,8 @@ class TestRandomID(unittest.TestCase):
         self._increment = 20
         self._A = _randn(self._m, self._n)
         self._B, self._P = random_id(self._A, self._k, self._increment)
-        self._approximation = self._B.dot(self._P)
+        self._approximation = np.dot(self._B, self._P)
+        self._P = self._P.base
 
     def test_matrices_shapes(self):
         """

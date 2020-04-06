@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-""" The data management module
+"""
+data_loader.py - The data management module
+===========================================
 
 This module handles the fetching of the data from the local resources path, given in the configuration and arranging it
 for our purposes of estimations. See the example for fetching the data for Example no. 1.

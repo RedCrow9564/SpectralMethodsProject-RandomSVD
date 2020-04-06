@@ -165,7 +165,7 @@ class DataLog:
         self._data: Dict = dict()
         self._log_fields: List = log_fields
         for log_field in log_fields:
-            self._data[log_field] = []
+            self._data[log_field] = list()
 
     def append(self, data_type: str, value: Scalar) -> None:
         """

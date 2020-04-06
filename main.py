@@ -6,10 +6,11 @@ main.py - The main module of the project
 
 This module contains the config for the experiment in the "config" function.
 Running this module invokes the :func:`main` function, which then performs the experiment and saves its results
-to the configured results folder. Example for running an experiment: ``python -m main.py``
+to the configured results folder. Example for running an experiment: ``python main.py``
 
 """
 import numpy as np
+from numpy.linalg import multi_dot
 from Infrastructure.utils import ex, DataLog, List, Callable, Scalar, RowVector, Matrix, measure_time
 from Infrastructure.enums import LogFields, ExperimentType
 from data_loader import get_data
@@ -111,7 +112,7 @@ def config():
     can be found in :mod:`enums.py`.
     """
 
-    experiment_type: str = ExperimentType.ExampleNo5
+    experiment_type: str = ExperimentType.ExampleNo1
     singular_values: RowVector = choose_singular_values(experiment_type)
     used_data_factory: Callable = get_data(experiment_type)
     data_sizes: List = choose_data_sizes(experiment_type)
@@ -144,10 +145,10 @@ def main(data_sizes: List, approximation_ranks: List, increments: List, singular
                 # Executing all the tested methods.
                 print(f'n={data_size}, k={approximation_rank}, l={approximation_rank + increment}')
                 U, sigma, VT, svd_duration = random_svd_with_run_time(data_matrix, approximation_rank, increment)
-                random_svd_accuracy: Scalar = np.linalg.norm(data_matrix - U.dot(np.diag(sigma).dot(VT)))
+                random_svd_accuracy: Scalar = np.linalg.norm(data_matrix - multi_dot([U, np.diag(sigma), VT]))
                 print(f'runtime={svd_duration}, accuracy={random_svd_accuracy}')
                 B, P, id_duration = random_id_with_run_time(data_matrix, approximation_rank, increment)
-                random_id_accuracy: Scalar = np.linalg.norm(data_matrix - B.dot(P))
+                random_id_accuracy: Scalar = np.linalg.norm(data_matrix - np.dot(B, P))
                 print(f'runtime={id_duration}, accuracy={random_id_accuracy}')
 
                 # Appending all the experiment results to the log.

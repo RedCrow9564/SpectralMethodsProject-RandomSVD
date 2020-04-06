@@ -34,7 +34,7 @@ class TestDataCreation(unittest.TestCase):
         data: Matrix = get_data(experiment_type)(data_size, singular_values)
         calculated_singular_values: RowVector = svdvals(data, check_finite=False)[:rank]
         self.assertTrue(np.allclose(data.shape, (data_size, data_size)))  # Validate data shape.
-        self.assertEqual(np.linalg.matrix_rank(data, tol=1.8e-16), rank)  # Validate data rank.
+        self.assertEqual(np.linalg.matrix_rank(data, tol=1.7e-16), rank)  # Validate data rank.
         self.assertTrue(np.allclose(singular_values, calculated_singular_values))  # Validate singular values.
 
     def test_example_no_2_data(self):

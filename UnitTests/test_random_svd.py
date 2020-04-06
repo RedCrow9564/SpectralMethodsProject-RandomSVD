@@ -8,6 +8,7 @@ This module contains the tests for the implementation of randomized SVD algorith
 """
 import unittest
 from numpy.random import randn as _randn
+from numpy.linalg import multi_dot
 import numpy as np
 import pyximport
 
@@ -29,7 +30,7 @@ class TestRandomSVD(unittest.TestCase):
         self._increment = 20
         self._A = _randn(self._m, self._n)
         self._U, self._sigma, self._VT = random_svd(self._A, self._k, self._increment)
-        self._approximation = self._U.dot(np.diag(self._sigma).dot(self._VT))
+        self._approximation = multi_dot([self._U, np.diag(self._sigma), self._VT])
 
     def test_matrices_shapes(self):
         """
@@ -42,9 +43,9 @@ class TestRandomSVD(unittest.TestCase):
         """
         This methods tests if the output decomposition satisfies the properties of SVD decomposition.
         """
-        self.assertTrue(np.allclose(self._U.T.dot(self._U), np.eye(self._k)))
-        self.assertTrue(np.allclose(self._VT.dot(self._VT.T), np.eye(self._k)))
-        self.assertTrue(np.all(self._sigma > 0))
+        self.assertTrue(np.allclose(np.dot(self._U.T, self._U), np.eye(self._k)))
+        self.assertTrue(np.allclose(np.dot(self._VT, self._VT.T), np.eye(self._k)))
+        self.assertTrue(np.all(self._sigma.base > 0))
 
     def test_decomposition_rank(self):
         """
