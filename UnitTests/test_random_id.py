@@ -14,6 +14,8 @@ import pyximport
 
 pyximport.install(setup_args={"include_dirs": np.get_include()}, reload_support=True)
 from randomized_decompositions import random_id
+from data_loader import get_data
+from Infrastructure.enums import ExperimentType
 
 
 class TestRandomID(unittest.TestCase):
@@ -28,10 +30,13 @@ class TestRandomID(unittest.TestCase):
         self._n = 30
         self._k = 5
         self._increment = 20
-        self._A = _randn(self._m, self._n)
-        self._B, self._P = random_id(self._A, self._k, self._increment)
-        self._approximation = np.dot(self._B, self._P)
-        self._P = self._P.base
+        self._A = get_data(ExperimentType.ExampleNo2)(self._m, np.arange(2 * self._k).astype(float))
+        self._approximation = random_id(self._A, self._k, self._increment)
+        self._B = self._approximation.B
+        self._P = self._approximation.P.base
+        self._A = self._A.as_numpy_arr()
+        self._n = self._A.shape[1]
+        self._approximation = self._approximation.as_numpy_arr()
 
     def test_matrices_shapes(self):
         """

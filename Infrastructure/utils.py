@@ -7,7 +7,7 @@ This module contains all frequently-used methods and objects which can be shared
 For example, data types name used for type-hinting, a basic enum class :class:`BaseEnum`, methods for measuring
 run-time of a given function.
 """
-from typing import List, Dict, Callable, Union, Iterator
+from typing import List, Dict, Callable, Union, Iterator, Tuple
 from nptyping import Array
 import inspect
 import time
@@ -136,12 +136,15 @@ def measure_time(method: Callable) -> Callable:
         A function which does exactly the same, with an additional run-time output value in seconds.
 
     """
-    def timed(*args, **kw):
+    def timed(*args, **kw) -> Tuple:
         ts = time.perf_counter_ns()
         result = method(*args, **kw)
         te = time.perf_counter_ns()
         duration_in_ms: float = (te - ts) * 1e-9
-        return result + (duration_in_ms,)
+        if isinstance(result, tuple):
+            return result + (duration_in_ms,)
+        else:
+            return result, duration_in_ms
     timed.__name__ = method.__name__ + " with time measure"
     return timed
 

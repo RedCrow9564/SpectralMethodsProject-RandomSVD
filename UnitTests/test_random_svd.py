@@ -8,12 +8,13 @@ This module contains the tests for the implementation of randomized SVD algorith
 """
 import unittest
 from numpy.random import randn as _randn
-from numpy.linalg import multi_dot
 import numpy as np
 import pyximport
 
-pyximport.install(setup_args={"include_dirs": np.get_include()}, reload_support=True)
+pyximport.install(setup_args={"include_dirs": np.get_include()}, reload_support=True, build_in_temp=True, build_dir=r'.')
 from randomized_decompositions import random_svd
+from data_loader import get_data
+from Infrastructure.enums import ExperimentType
 
 
 class TestRandomSVD(unittest.TestCase):
@@ -28,9 +29,13 @@ class TestRandomSVD(unittest.TestCase):
         self._n = 30
         self._k = 5
         self._increment = 20
-        self._A = _randn(self._m, self._n)
-        self._U, self._sigma, self._VT = random_svd(self._A, self._k, self._increment)
-        self._approximation = multi_dot([self._U, np.diag(self._sigma), self._VT])
+        self._A = get_data(ExperimentType.ExampleNo2)(self._m, np.arange(2 * self._k).astype(float))
+        self._approximation = random_svd(self._A, self._k, self._increment)
+        self._U = self._approximation.U
+        self._sigma = self._approximation.sigma
+        self._VT = self._approximation.V.T
+        self._approximation = self._approximation.as_numpy_arr()
+        self._A = self._A.as_numpy_arr()
 
     def test_matrices_shapes(self):
         """

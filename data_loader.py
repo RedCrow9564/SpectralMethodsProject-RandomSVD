@@ -11,14 +11,16 @@ Example:
 
 """
 
-from scipy.stats import ortho_group
+from scipy.linalg import qr
 import numpy as np
 from Infrastructure.enums import ExperimentType
 from Infrastructure.utils import Dict, RowVector, Matrix, create_factory, Callable
+from randomized_decompositions import MatInSVDForm, ExperimentNo5Form
 
 
 def _random_orthonormal_cols(data_size: int, columns: int) -> Matrix:
-    return ortho_group.rvs(data_size, size=1)[:, :columns]
+    return np.ascontiguousarray(qr(np.random.randn(data_size, columns), mode="economic", overwrite_a=True,
+                                   check_finite=False)[0])
 
 
 def _get_first_3_examples_data(data_size: int, singular_values: RowVector) -> Matrix:
@@ -35,8 +37,8 @@ def _get_first_3_examples_data(data_size: int, singular_values: RowVector) -> Ma
     """
     rank: int = len(singular_values)
     U: Matrix = _random_orthonormal_cols(data_size, rank)
-    VT: Matrix = _random_orthonormal_cols(data_size, rank).T
-    return U.dot(np.diag(singular_values).dot(VT))
+    V: Matrix = _random_orthonormal_cols(data_size, rank)
+    return MatInSVDForm(U, singular_values, V)
 
 
 def _get_example_4_data(data_size: int, singular_values: RowVector) -> Matrix:
@@ -51,15 +53,19 @@ def _get_example_4_data(data_size: int, singular_values: RowVector) -> Matrix:
         A data_size x data_size Matrix with the given singular values.
 
     """
-    U: Matrix = np.stack([np.ones(data_size),
-                          np.tile([1, -1], data_size // 2),
-                          np.tile([1, 1, -1, -1], data_size // 4),
-                          np.tile([1, 1, 1, 1, -1, -1, -1, -1], data_size // 8)]).T / np.sqrt(data_size)
-    VT: Matrix = np.stack([np.concatenate([np.ones(data_size - 1), [0]]) / np.sqrt(data_size - 1),
-                           np.concatenate([np.zeros(data_size - 1), [1]]),
-                           np.concatenate([np.tile([1, -1], (data_size - 2) // 2) / np.sqrt(data_size - 2), [0, 0]]),
-                           np.concatenate([[1, 0, -1], np.zeros(data_size - 3)]) / np.sqrt(2)])
-    return U.dot(np.diag(singular_values).dot(VT))
+    U: Matrix = np.ascontiguousarray(
+        np.stack([
+            np.ones(data_size),
+            np.tile([1, -1], data_size // 2),
+            np.tile([1, 1, -1, -1], data_size // 4),
+            np.tile([1, 1, 1, 1, -1, -1, -1, -1], data_size // 8)]).T) / np.sqrt(data_size)
+    V: Matrix = np.ascontiguousarray(
+        np.stack([
+            np.concatenate([np.ones(data_size - 1), [0]]) / np.sqrt(data_size - 1),
+            np.concatenate([np.zeros(data_size - 1), [1]]),
+            np.concatenate([np.tile([1, -1], (data_size - 2) // 2) / np.sqrt(data_size - 2), [0, 0]]),
+            np.concatenate([[1, 0, -1], np.zeros(data_size - 3)]) / np.sqrt(2)]).T)
+    return MatInSVDForm(U, np.array(singular_values), V)
 
 
 def _get_example_5_data(data_size: int, singular_values: RowVector) -> Matrix:
@@ -74,9 +80,7 @@ def _get_example_5_data(data_size: int, singular_values: RowVector) -> Matrix:
         A random size data_size x data_size Matrix with singular values 1 and the other input singular value.
 
     """
-    data: Matrix = singular_values[1] * np.eye(data_size)
-    data[0, :] += singular_values[0] * np.ones(data_size) / np.sqrt(data_size)
-    return data
+    return ExperimentNo5Form((data_size, data_size), singular_values[0])
 
 
 # A private dictionary used to create the method "get_data"

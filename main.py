@@ -10,7 +10,7 @@ to the configured results folder. Example for running an experiment: ``python ma
 
 """
 import numpy as np
-from numpy.linalg import multi_dot
+from scipy.linalg.interpolative import estimate_spectral_norm_diff, seed
 from Infrastructure.utils import ex, DataLog, List, Callable, Scalar, RowVector, Matrix, measure_time
 from Infrastructure.enums import LogFields, ExperimentType
 from data_loader import get_data
@@ -38,7 +38,7 @@ def choose_singular_values(experiment_type: ExperimentType) -> RowVector:
     elif experiment_type == ExperimentType.ExampleNo4:
         return [1, 1, 1e-8, 1e-8]
     elif experiment_type == ExperimentType.ExampleNo5:
-        return [1, 1e-17]
+        return [1e-7]
     return [-1]
 
 
@@ -96,11 +96,11 @@ def choose_data_sizes(experiment_type: ExperimentType) -> List:
 
     """
     if experiment_type in [ExperimentType.ExampleNo1, ExperimentType.ExampleNo2, ExperimentType.ExampleNo5]:
-        return np.geomspace(1e+2, 1e+3, 2, dtype=int).tolist()
+        return np.geomspace(1e+2, 1e+6, 5, dtype=int).tolist()
     elif experiment_type == ExperimentType.ExampleNo3:
-        return [1e+5]
+        return [int(1e+5)]
     elif experiment_type == ExperimentType.ExampleNo4:
-        return (4 * np.geomspace(1e+2, 1e+3, 2, dtype=int)).tolist()
+        return (4 * np.geomspace(1e+2, 1e+6, 5, dtype=int)).tolist()
     return [-1]
 
 
@@ -112,24 +112,26 @@ def config():
     can be found in :mod:`enums.py`.
     """
 
-    experiment_type: str = ExperimentType.ExampleNo1
+    experiment_type: str = ExperimentType.ExampleNo5
     singular_values: RowVector = choose_singular_values(experiment_type)
     used_data_factory: Callable = get_data(experiment_type)
     data_sizes: List = choose_data_sizes(experiment_type)
     approximation_ranks: List = choose_approximation_ranks(experiment_type)
     increments: List = choose_increments(experiment_type)
     results_path: str = r'Results/'
+    power_method_iterations: int = 100
 
 
 @ex.automain
 def main(data_sizes: List, approximation_ranks: List, increments: List, singular_values: RowVector,
-         used_data_factory: Callable, results_path: str, experiment_type: str) -> None:
+         used_data_factory: Callable, results_path: str, experiment_type: str, power_method_iterations, _seed) -> None:
     """ The main function of this project
 
     This functions performs the desired experiment according to the given configuration.
     The function runs the random_svd and random_id for every combination of data_size, approximation rank and increment
     given in the config and saves all the results to a csv file in the results folder (given in the configuration).
     """
+    seed(_seed)  # Seed the interpolative package of Scipy for later usage.
     results_log = DataLog(LogFields)  # Initializing an empty results log.
     random_svd_with_run_time: Callable = measure_time(random_svd)
     random_id_with_run_time: Callable = measure_time(random_id)
@@ -144,11 +146,13 @@ def main(data_sizes: List, approximation_ranks: List, increments: List, singular
             for increment in increments:
                 # Executing all the tested methods.
                 print(f'n={data_size}, k={approximation_rank}, l={approximation_rank + increment}')
-                U, sigma, VT, svd_duration = random_svd_with_run_time(data_matrix, approximation_rank, increment)
-                random_svd_accuracy: Scalar = np.linalg.norm(data_matrix - multi_dot([U, np.diag(sigma), VT]))
+                random_svd_approximation, svd_duration = random_svd_with_run_time(data_matrix, approximation_rank, increment)
+                random_svd_accuracy: Scalar = estimate_spectral_norm_diff(data_matrix, random_svd_approximation,
+                                                                          power_method_iterations)
                 print(f'runtime={svd_duration}, accuracy={random_svd_accuracy}')
-                B, P, id_duration = random_id_with_run_time(data_matrix, approximation_rank, increment)
-                random_id_accuracy: Scalar = np.linalg.norm(data_matrix - np.dot(B, P))
+                random_id_approximation, id_duration = random_id_with_run_time(data_matrix, approximation_rank, increment)
+                random_id_accuracy: Scalar = estimate_spectral_norm_diff(data_matrix, random_id_approximation,
+                                                                         power_method_iterations)
                 print(f'runtime={id_duration}, accuracy={random_id_accuracy}')
 
                 # Appending all the experiment results to the log.
