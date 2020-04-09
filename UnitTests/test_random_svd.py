@@ -32,7 +32,7 @@ class TestRandomSVD(unittest.TestCase):
         self._A = get_data(ExperimentType.ExampleNo2)(self._m, np.arange(2 * self._k).astype(float))
         self._approximation = random_svd(self._A, self._k, self._increment)
         self._U = self._approximation.U
-        self._sigma = self._approximation.sigma
+        self._sigma = np.array(self._approximation.sigma)
         self._VT = self._approximation.V.T
         self._approximation = self._approximation.as_numpy_arr()
         self._A = self._A.as_numpy_arr()
@@ -50,7 +50,7 @@ class TestRandomSVD(unittest.TestCase):
         """
         self.assertTrue(np.allclose(np.dot(self._U.T, self._U), np.eye(self._k)))
         self.assertTrue(np.allclose(np.dot(self._VT, self._VT.T), np.eye(self._k)))
-        self.assertTrue(np.all(self._sigma.base > 0))
+        self.assertTrue(np.all(self._sigma > 0))
 
     def test_decomposition_rank(self):
         """

@@ -33,7 +33,7 @@ class TestRandomID(unittest.TestCase):
         self._A = get_data(ExperimentType.ExampleNo2)(self._m, np.arange(2 * self._k).astype(float))
         self._approximation = random_id(self._A, self._k, self._increment)
         self._B = self._approximation.B
-        self._P = self._approximation.P.base
+        self._P = np.array(self._approximation.P)
         self._A = self._A.as_numpy_arr()
         self._n = self._A.shape[1]
         self._approximation = self._approximation.as_numpy_arr()

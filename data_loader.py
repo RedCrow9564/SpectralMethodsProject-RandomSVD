@@ -15,7 +15,7 @@ from scipy.linalg import qr
 import numpy as np
 from Infrastructure.enums import ExperimentType
 from Infrastructure.utils import Dict, RowVector, Matrix, create_factory, Callable
-from randomized_decompositions import MatInSVDForm, ExperimentNo5Form
+from matrices_classes import MatInSVDForm, ExperimentNo5Form
 
 
 def _random_orthonormal_cols(data_size: int, columns: int) -> Matrix:
@@ -70,14 +70,15 @@ def _get_example_4_data(data_size: int, singular_values: RowVector) -> Matrix:
 
 def _get_example_5_data(data_size: int, singular_values: RowVector) -> Matrix:
     """
-    A method which creates a data_size x data_size matrix with singular values 1 and the other input singular values.
+    A method which creates a ``data_size x data_size`` matrix :math:`A` with the form: :math:`A=uv^{T}+\sigma I_n`
+    where :math:`u=(1,0,...,0)` and :math:`v^{T}=\frac{1}{sqrt{n}}(1,1,...,1)`
 
     Args:
         data_size(int): The input data size n.
-        singular_value(RowVector): A 1x2 vector of singular values for the created matrix.
+        singular_values(RowVector): A vector of singular values for the created matrix.
 
     Returns:
-        A random size data_size x data_size Matrix with singular values 1 and the other input singular value.
+        A ``data_size x data_size`` Matrix in this form.
 
     """
     return ExperimentNo5Form((data_size, data_size), singular_values[0])
