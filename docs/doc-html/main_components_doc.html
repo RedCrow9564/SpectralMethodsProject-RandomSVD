@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Main Components Documentation &#8212; Spectral Methods in Data Processing - Final Project 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="documentation_homepage.html"><span><img src="_static/icon.png"></span>
+          Spectral Methods in Data Processing - Final Project</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="main_doc.html">Documentation</a></li>
+                <li><a href="https://github.com/RedCrow9564/SpectralMethodsProject-RandomSVD.git">Git Repo</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="documentation_homepage.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation_homepage.html">Table of Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_homepage.html#spectral-methods-in-data-processing-0372-4001-final-project">Spectral Methods in Data Processing (0372-4001) - Final Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_homepage.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Main Components Documentation</a><ul>
+<li><a class="reference internal" href="#data-loader-py-the-data-management-module">data_loader.py - The data management module</a></li>
+<li><a class="reference internal" href="#randomized-decompositions-pyx-randomized-algorithms-module">randomized_decompositions.pyx - Randomized algorithms module</a></li>
+<li><a class="reference internal" href="#matrices-classes-pyx-matrix-representations-module">matrices_classes.pyx - Matrix representations module</a></li>
+<li><a class="reference internal" href="#main-py-the-main-module-of-the-project">main.py - The main module of the project</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/main_components_doc.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="main-components-documentation">
+<span id="main-components-doc"></span><h1>Main Components Documentation<a class="headerlink" href="#main-components-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main Components Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-loader-py-the-data-management-module">data_loader.py - The data management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#randomized-decompositions-pyx-randomized-algorithms-module">randomized_decompositions.pyx - Randomized algorithms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matrices-classes-pyx-matrix-representations-module">matrices_classes.pyx - Matrix representations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-py-the-main-module-of-the-project">main.py - The main module of the project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+<span class="target" id="module-data_loader"></span><div class="section" id="data-loader-py-the-data-management-module">
+<h2>data_loader.py - The data management module<a class="headerlink" href="#data-loader-py-the-data-management-module" title="Permalink to this headline">¶</a></h2>
+<p>This module handles the fetching of the data from the local resources path, given in the configuration and arranging it
+for our purposes of estimations. For instance, the data for Example no. 1 can be fetched by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_data</span><span class="p">(</span><span class="n">ExperimentType</span><span class="o">.</span><span class="n">ExampleNo1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Creating</span> <span class="n">the</span> <span class="n">data</span> <span class="k">for</span> <span class="n">Example</span> <span class="n">no</span><span class="o">.</span> <span class="mi">1</span> <span class="n">of</span> <span class="n">the</span> <span class="n">paper</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<span class="target" id="module-randomized_decompositions"></span><div class="section" id="randomized-decompositions-pyx-randomized-algorithms-module">
+<h2>randomized_decompositions.pyx - Randomized algorithms module<a class="headerlink" href="#randomized-decompositions-pyx-randomized-algorithms-module" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the two randomized algorithms for matrix decompositions: the randomized SVD and randomized ID.</p>
+<dl class="attribute">
+<dt id="randomized_decompositions.random_id">
+<code class="sig-prename descclassname">randomized_decompositions.</code><code class="sig-name descname">random_id</code><a class="headerlink" href="#randomized_decompositions.random_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function for Random ID algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>GeneralMat</em>) – The matrix to decompose.</p></li>
+<li><p><strong>k</strong> (<em>const int</em>) – Approximation rank.</p></li>
+<li><p><strong>increment</strong> (<em>const int</em>) – The extra sampled columns in the approximation (beyond the first <code class="docutils literal notranslate"><span class="pre">k</span></code> columns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matrices <span class="math notranslate nohighlight">\(B, P\)</span> for which the ID approximation is <span class="math notranslate nohighlight">\(BP\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="randomized_decompositions.random_svd">
+<code class="sig-prename descclassname">randomized_decompositions.</code><code class="sig-name descname">random_svd</code><a class="headerlink" href="#randomized_decompositions.random_svd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function for Random SVD algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>GeneralMat</em>) – The matrix to decompose.</p></li>
+<li><p><strong>k</strong> (<em>const int</em>) – Approximation rank.</p></li>
+<li><p><strong>increment</strong> (<em>const int</em>) – The extra sampled columns in the approximation (beyond the first <code class="docutils literal notranslate"><span class="pre">k</span></code> columns).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matrices <span class="math notranslate nohighlight">\(U, V\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span> for which the SVD approximation is <span class="math notranslate nohighlight">\(U\Sigma V^{T}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-matrices_classes"></span><div class="section" id="matrices-classes-pyx-matrix-representations-module">
+<h2>matrices_classes.pyx - Matrix representations module<a class="headerlink" href="#matrices-classes-pyx-matrix-representations-module" title="Permalink to this headline">¶</a></h2>
+<p>This module contains classes for convenient representations of matrices.</p>
+<dl class="class">
+<dt id="matrices_classes.ExperimentNo5Form">
+<em class="property">class </em><code class="sig-prename descclassname">matrices_classes.</code><code class="sig-name descname">ExperimentNo5Form</code><a class="headerlink" href="#matrices_classes.ExperimentNo5Form" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for storing a matrix <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m \times n}\)</span> as <span class="math notranslate nohighlight">\(A=uv^{T}+\sigma I_n\)</span> where <span class="math notranslate nohighlight">\(u=(1,0,...,0)\)</span>
+and <span class="math notranslate nohighlight">\(v^{T}=\frac{1}{\sqrt n}(1, 1, ..., 0)\)</span></p>
+<dl class="method">
+<dt id="matrices_classes.ExperimentNo5Form.as_numpy_arr">
+<code class="sig-name descname">as_numpy_arr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.ExperimentNo5Form.as_numpy_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an object matrix into a Numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Numpy array which represents this matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.ExperimentNo5Form.matmat">
+<code class="sig-name descname">matmat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.ExperimentNo5Form.matmat" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id1"><span class="problematic" id="id2">:method:`dot`</span></a> for matrix-matrix product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.ExperimentNo5Form.matvec">
+<code class="sig-name descname">matvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.ExperimentNo5Form.matvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id3"><span class="problematic" id="id4">:method:`dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.ExperimentNo5Form.rmatvec">
+<code class="sig-name descname">rmatvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.ExperimentNo5Form.rmatvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id5"><span class="problematic" id="id6">:method:`transpose_dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="matrices_classes.MatInIDForm">
+<em class="property">class </em><code class="sig-prename descclassname">matrices_classes.</code><code class="sig-name descname">MatInIDForm</code><a class="headerlink" href="#matrices_classes.MatInIDForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for storing an ID decomposition for a matrix <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(A=BP\)</span> where
+<span class="math notranslate nohighlight">\(B\in\mathbb{R}^{m \times r}\)</span> in the skeleton matrix and <span class="math notranslate nohighlight">\(P\in\mathbb{R}^{r \times n}\)</span>
+is the interpolatory matrix.</p>
+<dl class="method">
+<dt id="matrices_classes.MatInIDForm.as_numpy_arr">
+<code class="sig-name descname">as_numpy_arr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInIDForm.as_numpy_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an object matrix into a Numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Numpy array which represents this matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInIDForm.matmat">
+<code class="sig-name descname">matmat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInIDForm.matmat" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id7"><span class="problematic" id="id8">:method:`dot`</span></a> for matrix-matrix product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInIDForm.matvec">
+<code class="sig-name descname">matvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInIDForm.matvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id9"><span class="problematic" id="id10">:method:`dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInIDForm.rmatvec">
+<code class="sig-name descname">rmatvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInIDForm.rmatvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id11"><span class="problematic" id="id12">:method:`transpose_dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="matrices_classes.MatInSVDForm">
+<em class="property">class </em><code class="sig-prename descclassname">matrices_classes.</code><code class="sig-name descname">MatInSVDForm</code><a class="headerlink" href="#matrices_classes.MatInSVDForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for storing an SVD decomposition for a matrix <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(A=U\Sigma V^{T}\)</span>
+where <span class="math notranslate nohighlight">\(U\in\mathbb{R}^{m \times r}\)</span> and <span class="math notranslate nohighlight">\(V\in\mathbb{R}^{r \times n}\)</span> have orthonormal columns and
+<span class="math notranslate nohighlight">\(\Sigma\in\mathbb{R}^{r \times r}\)</span> is diagonal and positive-definite.</p>
+<dl class="method">
+<dt id="matrices_classes.MatInSVDForm.as_numpy_arr">
+<code class="sig-name descname">as_numpy_arr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInSVDForm.as_numpy_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an object matrix into a Numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Numpy array which represents this matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInSVDForm.matmat">
+<code class="sig-name descname">matmat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInSVDForm.matmat" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id13"><span class="problematic" id="id14">:method:`dot`</span></a> for matrix-matrix product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInSVDForm.matvec">
+<code class="sig-name descname">matvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInSVDForm.matvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id15"><span class="problematic" id="id16">:method:`dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="matrices_classes.MatInSVDForm.rmatvec">
+<code class="sig-name descname">rmatvec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrices_classes.MatInSVDForm.rmatvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Python wrapper for <a href="#id17"><span class="problematic" id="id18">:method:`transpose_dot`</span></a> for matrix-vector product.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-main"></span><div class="section" id="main-py-the-main-module-of-the-project">
+<h2>main.py - The main module of the project<a class="headerlink" href="#main-py-the-main-module-of-the-project" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the config for the experiment in the “config” function.
+Running this module invokes the <a class="reference internal" href="#module-main" title="main"><code class="xref py py-func docutils literal notranslate"><span class="pre">main()</span></code></a> function, which then performs the experiment and saves its results
+to the configured results folder. Example for running an experiment: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code></p>
+<dl class="function">
+<dt id="main.choose_approximation_ranks">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">choose_approximation_ranks</code><span class="sig-paren">(</span><em class="sig-param">experiment_type: Infrastructure.enums.ExperimentType</em><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#main.choose_approximation_ranks" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sets the needed approximation ranks, according to the given experiment_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>experiment_type</strong> (<a class="reference internal" href="infrastructure_doc.html#Infrastructure.enums.ExperimentType" title="Infrastructure.enums.ExperimentType"><em>ExperimentType</em></a>) – The performed experiment. For example, <code class="docutils literal notranslate"><span class="pre">ExperimentType.ExampleNo1</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of the required approximation ranks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.choose_data_sizes">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">choose_data_sizes</code><span class="sig-paren">(</span><em class="sig-param">experiment_type: Infrastructure.enums.ExperimentType</em><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#main.choose_data_sizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sets the needed data sizes, according to the given experiment_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>experiment_type</strong> (<a class="reference internal" href="infrastructure_doc.html#Infrastructure.enums.ExperimentType" title="Infrastructure.enums.ExperimentType"><em>ExperimentType</em></a>) – The performed experiment. For example, <code class="docutils literal notranslate"><span class="pre">ExperimentType.ExampleNo1</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of the required data sizes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.choose_increments">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">choose_increments</code><span class="sig-paren">(</span><em class="sig-param">experiment_type: Infrastructure.enums.ExperimentType</em><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#main.choose_increments" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sets the needed increments, according to the given experiment_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>experiment_type</strong> (<a class="reference internal" href="infrastructure_doc.html#Infrastructure.enums.ExperimentType" title="Infrastructure.enums.ExperimentType"><em>ExperimentType</em></a>) – The performed experiment. For example, <code class="docutils literal notranslate"><span class="pre">ExperimentType.ExampleNo1</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of the required increments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.choose_singular_values">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">choose_singular_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.choose_singular_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sets the needed singular values, according to the given experiment_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>experiment_type</strong> (<a class="reference internal" href="infrastructure_doc.html#Infrastructure.enums.ExperimentType" title="Infrastructure.enums.ExperimentType"><em>ExperimentType</em></a>) – The performed experiment. For example, <code class="docutils literal notranslate"><span class="pre">ExperimentType.ExampleNo1</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A RowVector of the required singular values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.main">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main function of this project</p>
+<p>This functions performs the desired experiment according to the given configuration.
+The function runs the random_svd and random_id for every combination of data_size, approximation rank and increment
+given in the config and saves all the results to a csv file in the results folder (given in the configuration).</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, Elad Eatah.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

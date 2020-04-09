@@ -4,7 +4,9 @@ enums.py - All enums section
 ============================
 
 This module contains all possible enums of this project. Most of them are used by the configuration section in
-:mod:`main`. An example for using enum: ``ExperimentType.ExampleNo1``
+:mod:`main`. An example for using enum:
+::
+    ExperimentType.ExampleNo1
 
 """
 

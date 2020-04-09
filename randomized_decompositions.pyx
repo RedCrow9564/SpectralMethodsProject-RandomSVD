@@ -23,7 +23,7 @@ def random_svd(GeneralMat A, const int k, const int increment) -> Matrix:
         increment(const int): The extra sampled columns in the approximation (beyond the first ``k`` columns).
 
     Returns:
-        Matrices :math:`U, V` and :math:`\Sigma` for which the SVD approximation is :math:`U\SigmaV^{T}`
+        Matrices :math:`U, V` and :math:`\Sigma` for which the SVD approximation is :math:`U\Sigma V^{T}`
     """
     cdef ssize_t m = A.shape[0]
     cdef const double[::1] sigma
@@ -45,7 +45,7 @@ def random_id(GeneralMat A, const int k, const int increment) -> Matrix:
         increment(const int): The extra sampled columns in the approximation (beyond the first ``k`` columns.
 
     Returns:
-        Matrices :math:`U, V` and :math:`\Sigma` for which the SVD approximation is :math:`U\SigmaV^{T}`
+        Matrices :math:`B, P` for which the ID approximation is :math:`BP`
     """
     cdef ssize_t m = A.shape[0]
     cdef const int[::1] idx

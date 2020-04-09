@@ -61,9 +61,9 @@ cdef inline double[:, :] multiply_by_diagonal_mat(const double[:, :] mat, const 
     return result
 
 cdef class ExperimentNo5Form:
-    """
-    A class for storing a matrix :math:`A` as :math:`A=uv^{T}+\sigma I_n` where :math:`u=(1,0,...,0)`
-    and :math:`v^{T}=\frac{1}{sqrt{n}}(1,1,...,1)`
+    r"""
+    A class for storing a matrix :math:`A\in\mathbb{R}^{m \times n}` as :math:`A=uv^{T}+\sigma I_n` where :math:`u=(1,0,...,0)`
+    and :math:`v^{T}=\frac{1}{\sqrt n}(1, 1, ..., 0)`
     """
     def __init__(self, const (Py_ssize_t, Py_ssize_t) mat_shape, const double sigma):
         self.shape[0] = mat_shape[0]
@@ -172,10 +172,10 @@ cdef class ExperimentNo5Form:
 
 
 cdef class MatInSVDForm:
-    """
-    A class for storing an SVD decomposition for a matrix :math:`A\in\R^{m\times n}`: :math:`A=U\Sigma V^{T}` where
-    :math:`U\in\R^{m\times r}` and :math:`V\in\R^{r\times n}` have orthonormal columns and
-    :math:`\Sigma\in\R^{r\times r}` is diagonal and positive-definite.
+    r"""
+    A class for storing an SVD decomposition for a matrix :math:`A\in\mathbb{R}^{m \times n}`: :math:`A=U\Sigma V^{T}`
+    where :math:`U\in\mathbb{R}^{m \times r}` and :math:`V\in\mathbb{R}^{r \times n}` have orthonormal columns and
+    :math:`\Sigma\in\mathbb{R}^{r \times r}` is diagonal and positive-definite.
     """
     def __init__(self, const double[:, ::1] mat_U, const double[::1] sigmas, const double[:, ::1] mat_V):
         self.U = mat_U
@@ -261,9 +261,10 @@ cdef class MatInSVDForm:
 
 
 cdef class MatInIDForm:
-    """
-    A class for storing an ID decomposition for a matrix :math:`A\in\R^{m\times n}`: :math:`A=BP` where
-    :math:`B\in\R^{m\times r}` in the skeleton matrix and :math:`P\in\R^{r\times n}` is the interpolatory matrix.
+    r"""
+    A class for storing an ID decomposition for a matrix :math:`A\in\mathbb{R}^{m \times n}`: :math:`A=BP` where
+    :math:`B\in\mathbb{R}^{m \times r}` in the skeleton matrix and :math:`P\in\mathbb{R}^{r \times n}`
+    is the interpolatory matrix.
     """
     def __init__(self, const double[:, ::1] mat_B, const double[::1, :] mat_P):
         self.B = mat_B

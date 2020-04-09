@@ -4,9 +4,8 @@ data_loader.py - The data management module
 ===========================================
 
 This module handles the fetching of the data from the local resources path, given in the configuration and arranging it
-for our purposes of estimations. See the example for fetching the data for Example no. 1.
-
-Example:
+for our purposes of estimations. For instance, the data for Example no. 1 can be fetched by:
+::
     get_data(ExperimentType.ExampleNo1) - Creating the data for Example no. 1 of the paper.
 
 """
