@@ -25,7 +25,7 @@ The Unit-Test files are:
 
 * [test_data_creation.py](UnitTests/test_data_creation.py) - Tests the data created for all experiments is the data described in the paper [[1]](#1) .
 * [test_random_svd.py](UnitTests/test_random_svd.py) - Tests the implementation of the Random SVD algorithm.
-* [test_random_id.py](UnitTests/test_random_id.py) - Tests the implementation of the Random Interpolative Decompositino algorithm.
+* [test_random_id.py](UnitTests/test_random_id.py) - Tests the implementation of the Random Interpolative Decomposition algorithm.
 
 Running any of these tests can be performed by:
 ```

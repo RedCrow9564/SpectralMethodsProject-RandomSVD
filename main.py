@@ -58,7 +58,7 @@ def choose_increments(experiment_type: ExperimentType) -> List:
                            ExperimentType.ExampleNo4, ExperimentType.ExampleNo5]:
         return [0]
     elif experiment_type == ExperimentType.ExampleNo3:
-        return [0] + np.round(np.geomspace(2, 16, 4)).astype(int).tolist()
+        return [0, 1] + np.round(np.geomspace(2, 16, 4)).astype(int).tolist()
     return [-1]
 
 
